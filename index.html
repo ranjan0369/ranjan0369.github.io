@@ -1,21 +1,1881 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jeevan Shrestha | Portfolio</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-light text-dark font-sans dark:bg-dark dark:text-white transition-colors duration-300">
-  <!-- Navigation, Hero, About, Projects, Experience, Resume, Contact, Footer go here -->
-  <h1 class="gradient-text text-center mt-20">Jeevan Shrestha Portfolio</h1>
-  <p class="text-center mt-5">Content moved to external CSS and JS files.</p>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeevan Shrestha | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#7c3aed",
+              secondary: "#5b21b6",
+              accent: "#ede9fe",
+              dark: "#1e293b",
+              light: "#f8fafc",
+              success: "#22c55e",
+              warning: "#f59e0b",
+              error: "#ef4444",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+            animation: {
+              float: "float 15s infinite ease-in-out",
+              "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+              timeline: "timeline 0.5s ease-out forwards",
+            },
+            keyframes: {
+              float: {
+                "0%, 100%": { transform: "translate(0, 0) rotate(0deg)" },
+                "25%": { transform: "translate(50px, 50px) rotate(90deg)" },
+                "50%": { transform: "translate(0, 100px) rotate(180deg)" },
+                "75%": { transform: "translate(-50px, 50px) rotate(270deg)" },
+              },
+              timeline: {
+                "0%": {
+                  opacity: "0",
+                  transform: "translateX(-50px)",
+                },
+                "100%": {
+                  opacity: "1",
+                  transform: "translateX(0)",
+                },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      .gradient-text {
+        background: linear-gradient(135deg, #7c3aed, #5b21b6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Name logo animation styles */
+      #nameLogo {
+        position: relative;
+        min-width: 80px;
+        transition: all 0.3s ease;
+      }
+
+      #nameLogo .short-name,
+      #nameLogo .full-name {
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-block;
+        transform-style: preserve-3d;
+        text-shadow: 
+          2px 2px 0 rgba(124, 58, 237, 0.2),
+          4px 4px 0 rgba(91, 33, 182, 0.1);
+      }
+
+      #nameLogo .full-name {
+        white-space: nowrap;
+        pointer-events: none;
+        transform: rotateX(-90deg) translateZ(20px);
+        opacity: 0;
+      }
+
+      #nameLogo .short-name {
+        transform: rotateX(0deg) translateZ(20px);
+      }
+
+      #nameLogo:hover .short-name,
+      #nameLogo:hover .full-name {
+        transform: rotateX(10deg) translateZ(30px);
+        text-shadow: 
+          4px 4px 0 rgba(124, 58, 237, 0.3),
+          8px 8px 0 rgba(91, 33, 182, 0.2);
+      }
+
+      /* Animation states */
+      #nameLogo.expanded .short-name {
+        transform: rotateX(90deg) translateZ(20px);
+        opacity: 0;
+      }
+
+      #nameLogo.expanded .full-name {
+        transform: rotateX(0deg) translateZ(20px);
+        opacity: 1;
+      }
+
+      #nameLogo.expanded:hover .full-name {
+        transform: rotateX(10deg) translateZ(30px);
+      }
+
+      /* Add gradient background */
+      body {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      }
+
+      .dark body {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      }
+
+      .floating-shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(40px);
+        opacity: 0.6;
+        animation: float 15s infinite ease-in-out;
+      }
+
+      .perspective-1000 {
+        perspective: 1000px;
+      }
+
+      .rotate-y-10 {
+        transform: rotateY(10deg);
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .glass-card::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: -1;
+      }
+
+      .dark .glass-card {
+        background: rgba(30, 41, 59, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .dark .glass-card::after {
+        background: rgba(30, 41, 59, 0.7);
+      }
+
+      .glass-card .card-shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(25px);
+        opacity: 0.3;
+        animation: float 15s infinite ease-in-out;
+        z-index: -1;
+      }
+
+      /* Remove purple line from experience cards */
+      .experience-card::before {
+        display: none;
+      }
+
+      .experience-card {
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-left: 40px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        z-index: 1;
+      }
+
+      .dark .experience-card {
+        background: rgba(30, 41, 59, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .project-card {
+        background: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        transition: all 0.3s ease;
+        opacity: 1 !important;
+        transform: none !important;
+        display: block !important;
+        position: relative;
+        z-index: 1;
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+      }
+
+      .project-card::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: -1;
+      }
+
+      .dark .project-card::after {
+        background: rgba(30, 41, 59, 0.7);
+      }
+
+      .project-card .card-shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(25px);
+        opacity: 0.3;
+        animation: float 15s infinite ease-in-out;
+        z-index: -1;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px) !important;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-card h3 {
+        color: #1e293b !important;
+        position: relative;
+        z-index: 2;
+      }
+
+      .project-card p {
+        color: #475569 !important;
+        position: relative;
+        z-index: 2;
+      }
+
+      .dark .project-card {
+        background: transparent !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      }
+
+      .dark .project-card h3 {
+        color: #f8fafc !important;
+      }
+
+      .dark .project-card p {
+        color: #cbd5e1 !important;
+      }
+
+      .skill-badge {
+        display: inline-block !important;
+        background: linear-gradient(135deg, #7c3aed, #5b21b6);
+        color: white !important;
+        padding: 0.35rem 0.7rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin: 0.15rem;
+        opacity: 1 !important;
+        transition: none;
+        z-index: 10;
+        position: relative;
+      }
+
+      .skill-badge:hover {
+        transform: none !important;
+        box-shadow: none;
+      }
+
+      .contact-input {
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        color: #1e293b;
+      }
+
+      .contact-input:focus {
+        border-color: #7c3aed;
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .dark .contact-input {
+        background: rgba(30, 41, 59, 0.2);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      .dark .contact-input:focus {
+        border-color: #7c3aed;
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+        background: rgba(30, 41, 59, 0.3);
+      }
+
+      .dark .contact-input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .nav-link {
+        position: relative;
+        padding: 0.5rem 1rem;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, #7c3aed, #5b21b6);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+
+      .nav-link.active::after {
+        transform: scaleX(1);
+      }
+
+      #canvas-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      /* Hero Section Styles */
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-content h1 {
+        font-size: 4rem;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+      }
+
+      .hero-content h2 {
+        font-size: 2rem;
+        line-height: 1.4;
+        margin-bottom: 1.5rem;
+        color: #1e293b;
+      }
+
+      .hero-content p {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        color: #475569;
+      }
+
+      .dark .hero-content h2 {
+        color: #f8fafc;
+      }
+
+      .dark .hero-content p {
+        color: #cbd5e1;
+      }
+
+      .hero-image-container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-image-container img {
+        border-radius: 1rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      /* Experience Section Styles */
+      .experience-card {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-left: 40px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(5px);
+        z-index: 1;
+      }
+
+      .experience-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, #7c3aed, #5b21b6);
+        z-index: 2;
+      }
+
+      .experience-card::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: rgba(255, 255, 255, 0.1);
+        z-index: -1;
+      }
+
+      .dark .experience-card::after {
+        background: rgba(30, 41, 59, 0.7);
+      }
+
+      .experience-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .experience-card .card-shape {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(25px);
+        opacity: 0.3;
+        animation: float 15s infinite ease-in-out;
+        z-index: -1;
+      }
+
+      .dark .experience-card {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      .dark .experience-card:hover {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-left: 40px;
+        margin-bottom: 40px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2px;
+        height: 100%;
+        background: linear-gradient(to bottom, #7c3aed, #5b21b6);
+      }
+
+      .timeline-dot {
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(135deg, #7c3aed, #5b21b6);
+        border-radius: 50%;
+        position: absolute;
+        left: -9px;
+        top: 0;
+        box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+        z-index: 2;
+      }
+
+      .timeline-line {
+        background: linear-gradient(to bottom, #7c3aed, #5b21b6);
+        border-radius: 9999px;
+      }
+
+      /* Removing animations from experience section */
+      .experience-card.animate,
+      .timeline-item.animate,
+      .timeline-item::before,
+      .timeline-item.animate::before,
+      .timeline-dot,
+      .timeline-item.animate .timeline-dot,
+      .timeline-line.animate {
+        transform: none;
+        opacity: 1;
+        transition: none;
+      }
+
+      .dark .glass-card {
+        background: rgba(30, 41, 59, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .dark .resume-section {
+        background: #1e293b;
+      }
+
+      .dark .resume-section h3 {
+        color: white;
+      }
+
+      .dark .resume-section p {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .dark .resume-section .text-dark {
+        color: rgba(255, 255, 255, 0.7) !important;
+      }
+
+      .dark .resume-section .text-dark\/60 {
+        color: rgba(255, 255, 255, 0.6) !important;
+      }
+
+      .dark .resume-section .text-dark\/70 {
+        color: rgba(255, 255, 255, 0.7) !important;
+      }
+
+      .dark .bg-accent {
+        background-color: #1e293b;
+      }
+
+      .dark .bg-white {
+        background-color: #1e293b;
+      }
+
+      .dark .text-dark {
+        color: white;
+      }
+
+      .dark .text-dark\/60 {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .dark .text-dark\/70 {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .dark .text-dark\/80 {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .dark .contact-input {
+        background: #1e293b;
+        border-color: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
+
+      .dark .contact-input:focus {
+        border-color: #7c3aed;
+        box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+      }
+
+      .read-more-btn {
+        transition: all 0.3s ease;
+      }
+
+      .read-more-btn:hover {
+        transform: translateX(5px);
+      }
+
+      #experienceModal {
+        backdrop-filter: blur(5px);
+      }
+
+      #experienceModal.flex {
+        display: flex;
+      }
+
+      #experienceModal.flex .bg-white {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      /* About Section Styles */
+      #about .glass-card {
+        background: transparent;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .dark #about .glass-card {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Fix text colors in About section */
+      #about .text-dark {
+        color: #1e293b !important;
+      }
+
+      #about .text-dark\/70 {
+        color: rgba(30, 41, 59, 0.7) !important;
+      }
+
+      #about .text-dark\/60 {
+        color: rgba(30, 41, 59, 0.6) !important;
+      }
+
+      .dark #about .text-dark {
+        color: #f8fafc !important;
+      }
+
+      .dark #about .text-dark\/70 {
+        color: rgba(248, 250, 252, 0.7) !important;
+      }
+
+      .dark #about .text-dark\/60 {
+        color: rgba(248, 250, 252, 0.6) !important;
+      }
+
+      /* Fix Notable Projects section */
+      #about .bg-white\/20 {
+        background-color: transparent;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      #about .bg-white\/20:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
+      .dark #about .bg-white\/20 {
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .dark #about .bg-white\/20:hover {
+        background-color: rgba(30, 41, 59, 0.3);
+      }
+
+      /* Fix for skills container */
+      #about .flex-wrap {
+        display: flex !important;
+        flex-wrap: wrap !important;
+      }
+
+      /* Fix for skill badges container */
+      #about .skills-container {
+        overflow: visible;
+        min-height: 30px;
+        margin-bottom: 8px;
+      }
+
+      /* Fix for projects section */
+      #projects {
+        overflow: visible;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* No hover animations for skill badges */
+      #about .skill-badge {
+        transition: none;
+        transform: none !important;
+      }
+
+      #about .skill-badge:hover {
+        transform: none !important;
+        box-shadow: none;
+      }
+
+      /* Add indentation for wrapped text in list items */
+      .list-disc li {
+        text-indent: -1.5em;
+        padding-left: 1.5em;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-light text-dark font-sans dark:bg-dark dark:text-white transition-colors duration-300"
+  >
+    <!-- Three.js Canvas -->
+    <div id="canvas-container" style="display: none"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 glass-card shadow-sm z-50">
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div class="text-3xl font-bold cursor-pointer transition-all duration-300" id="nameLogo">
+          <span class="short-name bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">JS</span>
+          <span class="full-name opacity-0 absolute left-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Jeevan Shrestha</span>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a
+            href="#home"
+            class="nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+            >About</a
+          >
+          <a
+            href="#projects"
+            class="nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+            >Projects</a
+          >
+          <a
+            href="#experience"
+            class="nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+            >Experience</a
+          >
+          <a
+            href="#contact"
+            class="nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+            >Contact</a
+          >
+        </div>
+        <div class="flex items-center space-x-4">
+          <button
+            class="dark-mode-toggle text-xl p-2 rounded-full hover:bg-accent transition-colors"
+          >
+            <i class="fas fa-moon text-dark dark:text-white"></i>
+            <i class="fas fa-sun text-dark dark:text-white hidden"></i>
+          </button>
+          <button
+            class="md:hidden text-xl p-2 rounded-full hover:bg-accent transition-colors"
+            id="mobile-menu-button"
+          >
+            <i class="fas fa-bars text-dark dark:text-white"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div
+        class="hidden md:hidden bg-white dark:bg-dark shadow-lg absolute left-0 right-0 top-full z-50 p-4 space-y-4"
+      >
+        <a
+          href="#home"
+          class="block nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+          >Home</a
+        >
+        <a
+          href="#about"
+          class="block nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+          >About</a
+        >
+        <a
+          href="#projects"
+          class="block nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+          >Projects</a
+        >
+        <a
+          href="#experience"
+          class="block nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+          >Experience</a
+        >
+        <a
+          href="#contact"
+          class="block nav-link text-dark dark:text-white hover:text-primary transition-colors duration-300"
+          >Contact</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center relative">
+      <div class="container mx-auto px-6 py-12 mt-50">
+        <div
+          class="flex flex-col md:flex-row items-center gap-8 bg-white/80 dark:bg-dark/80 rounded-2xl shadow-lg p-8 backdrop-blur-md"
+        >
+          <div class="hero-image-container md:w-1/3 flex justify-center">
+            <div
+              class="w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-primary/20 shadow-xl"
+            >
+              <img
+                src="images/jeevan.jpg"
+                alt="Jeevan Shrestha"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+          <div class="hero-content md:w-2/3">
+            <h1 class="text-4xl md:text-5xl font-bold mb-3 gradient-text">
+              Jeevan Shrestha
+            </h1>
+            <h2 class="text-xl md:text-2xl mb-4 font-medium">
+              Software Engineer
+            </h2>
+            <div class="mb-6 space-y-2">
+             <p class="text-base text-justify text-dark/80 dark:text-white/80 leading-relaxed">
+                Full Stack Java Developer with over 6 years of experience in designing, developing, and 
+                deploying high-performance Java-based applications using Spring Boot. Specialized in backend 
+                development (80%) with additional expertise in frontend technologies (20%). Experienced in building 
+                and maintaining scalable cloud-native applications, automating deployments through CI/CD pipelines, 
+                and managing data workflows using tools such as AWS, Apache Airflow, Terraform, and GitLab. Known for
+                 strong problem-solving skills, clear communication, and a continuous drive to learn and adopt emerging 
+                 technologies.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-3">
+                <span
+                  class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+                  >Full-Stack Development</span
+                >
+                <span
+                  class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+                  >AI/ML Integration</span
+                >
+                <span
+                  class="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium"
+                  >Responsive Design</span
+                >
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#projects"
+                class="px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                View My Work
+              </a>
+              <a
+                href="#contact"
+                class="px-6 py-2.5 rounded-full font-medium border-2 border-primary text-primary dark:text-white hover:bg-primary hover:text-white transition-all duration-300"
+              >
+                Get in Touch
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-8">
+          <h2 class="text-4xl font-bold mb-2 text-dark dark:text-white">
+            About Me
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded"
+          ></div>
+        </div>
+        <div class="max-w-6xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Education Card -->
+            <div
+              class="bg-white dark:bg-dark rounded-2xl p-6 shadow-lg glass-card"
+            >
+              <!-- Floating shapes inside card -->
+              <div
+                class="card-shape w-28 h-28 bg-primary/30 top-10 right-10"
+              ></div>
+              <div
+                class="card-shape w-20 h-20 bg-secondary/30 bottom-10 left-10"
+              ></div>
+
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
+                >
+                  <i class="fas fa-graduation-cap text-xl text-primary"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-dark dark:text-white">
+                  Education
+                </h3>
+              </div>
+              <div class="space-y-3">
+                <div>
+                  <h4 class="font-medium text-dark dark:text-white">
+                    Master of Science
+                  </h4>
+                  <p class="text-dark/70 dark:text-white/70">
+                    Applied Computer Science
+                  </p>
+                  <p class="text-sm text-dark/60 dark:text-white/60">
+                    Southeast Missouri State University
+                  </p>
+                  <p class="text-sm text-primary"></p>
+                </div>
+                
+              </div>
+            </div>
+
+            <!-- Experience Card -->
+            <div
+              class="bg-white dark:bg-dark rounded-2xl p-6 shadow-lg glass-card"
+            >
+              <!-- Floating shapes inside card -->
+              <div
+                class="card-shape w-24 h-24 bg-secondary/30 top-10 left-10"
+              ></div>
+              <div
+                class="card-shape w-28 h-28 bg-primary/30 bottom-20 right-10"
+              ></div>
+
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
+                >
+                  <i class="fas fa-briefcase text-xl text-primary"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-dark dark:text-white">
+                  Experience
+                </h3>
+              </div>
+              <div class="space-y-3">
+                <div>
+                  <h4 class="font-medium text-dark dark:text-white">
+                    Full Stack Java Developer
+                  </h4>
+                  <p class="text-dark/70 dark:text-white/70">
+                    New York Life Insurance, New York, NY
+                  </p>
+                  <p class="text-sm text-primary">August 2023 - Present</p>
+                </div>
+                <div>
+                  <h4 class="font-medium text-dark dark:text-white">
+                    Senior Java Developer
+                  </h4>
+                  <p class="text-dark/70 dark:text-white/70">
+                    Delta Airlines, Atlanta, GA
+                  </p>
+                  <p class="text-sm text-primary">2020 - July 2023 </p>
+                </div>
+                 <div>
+                  <h4 class="font-medium text-dark dark:text-white">
+                    Junior Java Developer
+                  </h4>
+                  <p class="text-dark/70 dark:text-white/70">
+                    Albertsons, Boise, ID
+                  </p>
+                  <p class="text-sm text-primary">2019 - July 2020 </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Skills Card -->
+            <div
+              class="bg-white dark:bg-dark rounded-2xl p-6 shadow-lg glass-card"
+            >
+              <!-- Floating shapes inside card -->
+              <div
+                class="card-shape w-32 h-32 bg-secondary/30 top-20 right-10"
+              ></div>
+              <div
+                class="card-shape w-24 h-24 bg-primary/30 bottom-10 left-20"
+              ></div>
+
+              <div class="flex items-center gap-4 mb-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"
+                >
+                  <i class="fas fa-code text-xl text-primary"></i>
+                </div>
+                <h3 class="text-lg font-semibold text-dark dark:text-white">
+                  Skills
+                </h3>
+              </div>
+              <div class="space-y-3">
+                <div>
+                  <h4 class="font-medium text-dark dark:text-white mb-1">
+                    Frontend
+                  </h4>
+                  <div
+                    class="flex flex-wrap gap-1"
+                    style="display: flex !important; min-height: 30px"
+                  >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >React</span
+                    >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >TypeScript</span
+                    >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >Next.js</span
+                    >
+                  </div>
+                </div>
+                <div>
+                  <h4 class="font-medium text-dark dark:text-white mb-1">
+                    Backend & Database
+                  </h4>
+                  <div
+                    class="flex flex-wrap gap-1"
+                    style="display: flex !important; min-height: 30px"
+                  >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >Node.js</span
+                    >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >Python</span
+                    >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >Java</span
+                    >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >SQL</span
+                    >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >MongoDB</span
+                    >
+                  </div>
+                </div>
+                <div>
+                  <h4 class="font-medium text-dark dark:text-white mb-1">
+                    Tools & Technologies
+                  </h4>
+                  <div
+                    class="flex flex-wrap gap-1"
+                    style="display: flex !important; min-height: 30px"
+                  >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >Git</span
+                    >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >Docker</span
+                    >
+                    <span
+                      class="skill-badge"
+                      style="
+                        display: inline-block !important;
+                        opacity: 1 !important;
+                        position: relative;
+                        z-index: 10;
+                      "
+                      >AWS EC2</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold mb-4 text-dark dark:text-white">
+            Featured Projects
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded"
+          ></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+         <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-28 h-28 bg-primary/30 top-10 right-10"
+            ></div>
+            <div
+              class="card-shape w-24 h-24 bg-secondary/30 bottom-20 left-10"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                src="images/ff.png"
+                alt="Study Habit Analyzer"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+               Financial Fraud Detection
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">Scikit-learn</span>
+                <span class="skill-badge">Pandas</span>
+                <span class="skill-badge">SMOTE</span>
+              </div>
+              <a
+                href="https://github.com/shresthajeevan/Financial-Fraud-Detection"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+
+           <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-28 h-28 bg-primary/30 top-10 right-10"
+            ></div>
+            <div
+              class="card-shape w-24 h-24 bg-secondary/30 bottom-20 left-10"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                src="images/dd.png"
+                alt="Study Habit Analyzer"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+                Dependency Security Checker
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">Safety</span>
+                <span class="skill-badge">pip-audit</span>
+                <span class="skill-badge">GitHub Advisory Database</span>
+              </div>
+              <a
+                href="https://github.com/shresthajeevan/Dependency-Security-Checker"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+            <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-28 h-28 bg-primary/30 top-10 right-10"
+            ></div>
+            <div
+              class="card-shape w-24 h-24 bg-secondary/30 bottom-20 left-10"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                src="images/negative.png"
+                alt="Study Habit Analyzer"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+                TB Chest X-ray Detection System
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">Pandas</span>
+                <span class="skill-badge">Streamlit</span>
+                <span class="skill-badge">Firebase</span>
+              </div>
+              <a
+                href=https://github.com/parastiware/Final_Project"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+          <!-- Netflix Clone -->
+          <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-32 h-32 bg-primary/30 top-20 right-10"
+            ></div>
+            <div
+              class="card-shape w-24 h-24 bg-secondary/30 bottom-10 left-20"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                src="images/netflix.png"
+                alt="Netflix UI Replica"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+                Netflix UI Replica
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">MongoDB</span>
+                <span class="skill-badge">Express</span>
+                <span class="skill-badge">React</span>
+                <span class="skill-badge">Node.js</span>
+              </div>
+              <a
+                href="https://github.com/shresthajeevan/Netflix-clone"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+
+          <!-- Emotion Detection -->
+          <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-28 h-28 bg-secondary/30 top-20 left-10"
+            ></div>
+            <div
+              class="card-shape w-20 h-20 bg-primary/30 bottom-10 right-20"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                src="images/emotion.jpg"
+                alt="Emotion and Face Detection"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+                Emotion and Face Detection
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">Java</span>
+                <span class="skill-badge">OpenCV</span>
+              </div>
+              <a
+                href="https://github.com/shresthajeevan/Emotion-Detection"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+
+          <!-- Airbnb Clone -->
+          <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-36 h-36 bg-primary/30 top-20 right-10"
+            ></div>
+            <div
+              class="card-shape w-24 h-24 bg-secondary/30 bottom-10 left-10"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                src="images/air.jpg"
+                alt="Airbnb Clone"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+                Airbnb Clone
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">MongoDB</span>
+                <span class="skill-badge">Express</span>
+                <span class="skill-badge">React</span>
+                <span class="skill-badge">Node.js</span>
+              </div>
+              <a
+                href="https://github.com/shresthajeevan/Airbnb"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Airlines Booking System -->
+          <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-32 h-32 bg-secondary/30 top-20 left-10"
+            ></div>
+            <div
+              class="card-shape w-24 h-24 bg-primary/30 bottom-10 right-20"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                src="images/booking.png"
+                alt="Airlines Booking System"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+                Airlines Booking System
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">HTML&CSS</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">App</span>
+              </div>
+              <a
+                href="https://github.com/shresthajeevan/Airlines-Booking-System"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+
+          <!-- AI Powered Chatbot -->
+          <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-32 h-32 bg-secondary/30 top-10 left-10"
+            ></div>
+            <div
+              class="card-shape w-20 h-20 bg-primary/30 bottom-20 right-10"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                alt="AI Powered-Chatbot"
+                src="images/ai.png"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+                AI Powered-Chatbot
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">MongoDB</span>
+                <span class="skill-badge">Express</span>
+                <span class="skill-badge">React</span>
+                <span class="skill-badge">Node.js</span>
+              </div>
+              <a
+                href="https://github.com/shresthajeevan/AI-Chatbot"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+
+          <!-- Study Habit Analyzer -->
+          <div
+            class="project-card bg-white dark:bg-dark rounded-2xl overflow-hidden shadow-lg"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-28 h-28 bg-primary/30 top-10 right-10"
+            ></div>
+            <div
+              class="card-shape w-24 h-24 bg-secondary/30 bottom-20 left-10"
+            ></div>
+
+            <div class="h-48 overflow-hidden">
+              <img
+                src="images/study.png"
+                alt="Study Habit Analyzer"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-3 text-dark dark:text-white">
+                Study Habit Analyzer
+              </h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="skill-badge">HTML&CSS</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">Web App</span>
+              </div>
+              <a
+                href="https://github.com/shresthajeevan/Student-Study-Habit-Analyzer"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-block px-6 py-2.5 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Source Code
+              </a>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold mb-4 text-dark dark:text-white">
+            Experience
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded"
+          ></div>
+        </div>
+        <div class="max-w-4xl mx-auto">
+          <div class="relative">
+            <!-- Timeline Line -->
+            <div class="timeline-line absolute left-0 top-0 w-1 h-full"></div>
+
+            <!-- Timeline Items -->
+            <div class="space-y-12">
+              <!-- First Experience -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                  <!-- Floating shapes inside card -->
+                  <div
+                    class="card-shape w-32 h-32 bg-primary/30 top-10 right-10"
+                  ></div>
+                  <div
+                    class="card-shape w-20 h-20 bg-secondary/30 bottom-10 left-20"
+                  ></div>
+
+                  <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4"
+                  >
+                    <div>
+                      <h3 class="text-xl font-semibold text-primary">
+                        Full Stack Java Developer
+                      </h3>
+                      <p class="text-dark/70 dark:text-white/70">
+                        New York Life Insurance, New York, NY
+                      </p>
+                    </div>
+                    <span class="text-sm text-dark/60 dark:text-white/60"
+                      >August 2023 - Present</span
+                    >
+                  </div>
+                  <ul
+                    class="list-disc list-inside space-y-2 text-dark/70 dark:text-white/70"
+                  >
+                    <li>
+                        Led Agile practices including sprint planning, daily stand-ups, and retrospectives, fostering collaboration and continuous delivery across development teams                    </li>
+                    <li>
+                        Architected and developed a cloud-native platform on AWS using EKS, Redshift, and S3, enabling scalable, secure, and efficient data processing.
+                    </li>
+                    <li>
+                        Built a microservices architecture with Spring Boot and Docker, allowing independent deployments, enhanced scalability, and flexible service management.
+                    </li>
+                    <li>
+                        Implemented CI/CD pipelines in GitLab, reducing deployment time by 50% through automation and improving release velocity.
+                    </li>
+                  </ul>
+                 
+                </div>
+              </div>
+
+              <!-- Second Experience -->
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                  <!-- Floating shapes inside card -->
+                  <div
+                    class="card-shape w-28 h-28 bg-secondary/30 top-16 right-16"
+                  ></div>
+                  <div
+                    class="card-shape w-24 h-24 bg-primary/30 bottom-5 left-40"
+                  ></div>
+
+                  <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4"
+                  >
+                    <div>
+                      <h3 class="text-xl font-semibold text-primary">
+                        Senior Java Developer
+                      </h3>
+                      <p class="text-dark/70 dark:text-white/70">
+                        Delta Airlines, Atlanta, GA
+                      </p>
+                    </div>
+                    <span class="text-sm text-dark/60 dark:text-white/60"
+                      >2020 - July 2023</span
+                    >
+                  </div>
+                  <ul
+                    class="list-disc list-inside space-y-2 text-dark/70 dark:text-white/70"
+                  >
+                    <li>
+                        Collaborated in all phases of the Software Development Life Cycle (SDLC), including requirement analysis, design, development, testing, deployment, and maintenance.
+                    </li>
+                    <li>
+                        Implemented secure authentication mechanisms using OAuth2 and JWT to improve user experience and align with industry-standard security practices.
+                    </li>
+                    <li>
+                        Improved performance of high-volume data pipelines by optimizing queries, implementing data partitioning, and using caching strategies, resulting in a 40% reduction in processing time.
+                    </li>
+                  </ul>
+                  
+                </div>
+              </div>
+              <!-- Third Experience-->
+                 <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="experience-card">
+                  <!-- Floating shapes inside card -->
+                  <div
+                    class="card-shape w-28 h-28 bg-secondary/30 top-16 right-16"
+                  ></div>
+                  <div
+                    class="card-shape w-24 h-24 bg-primary/30 bottom-5 left-40"
+                  ></div>
+
+                  <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4"
+                  >
+                    <div>
+                      <h3 class="text-xl font-semibold text-primary">
+                        Junior Java Developer
+                      </h3>
+                      <p class="text-dark/70 dark:text-white/70">
+                        Albertsons, Boise, ID
+                      </p>
+                    </div>
+                    <span class="text-sm text-dark/60 dark:text-white/60"
+                      >February 2019 - July 2020</span
+                    >
+                  </div>
+                  <ul
+                    class="list-disc list-inside space-y-2 text-dark/70 dark:text-white/70"
+                  >
+                    <li>
+                      Deployed cloud-native applications using AWS services such as EC2, S3, RDS, and Lambda, improving scalability, performance, and cost-efficiency.
+                    </li>
+                    <li>
+                      Developed and enhanced backend services using Java and Spring Boot, building robust RESTful APIs to support scalable and high-performing applications.
+                    </li>
+                    <li>
+                      Applied optimization techniques like data partitioning, query tuning, and compression to enhance data processing speed and system efficiency.
+                    </li>
+                  </ul>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experience Details Modal -->
+      <div
+        id="experienceModal"
+        class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50"
+      >
+        <div
+          class="bg-white dark:bg-dark rounded-2xl p-8 max-w-2xl w-full mx-4 transform transition-all duration-300 scale-95 opacity-0"
+        >
+          <div class="flex justify-between items-start mb-6">
+            <h3
+              class="text-2xl font-semibold text-primary"
+              id="modalTitle"
+            ></h3>
+            <button
+              class="close-modal text-2xl text-dark/60 dark:text-white/60 hover:text-primary"
+            >
+              &times;
+            </button>
+          </div>
+          <div class="text-dark/70 dark:text-white/70" id="modalContent">
+            <!-- Content will be dynamically inserted here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="py-16 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-8">
+          <h2 class="text-4xl font-bold mb-4 text-dark dark:text-white">
+            Resume
+          </h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded"
+          ></div>
+        </div>
+        <div class="max-w-3xl mx-auto">
+          <div
+            class="bg-white/90 dark:bg-dark/90 rounded-2xl p-8 shadow-lg glass-card backdrop-blur-md text-center"
+          >
+            <!-- Floating shapes inside card -->
+            <div
+              class="card-shape w-40 h-40 bg-primary/30 top-10 right-10"
+            ></div>
+            <div
+              class="card-shape w-28 h-28 bg-secondary/30 bottom-10 left-10"
+            ></div>
+
+            <div
+              class="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4 mx-auto"
+            >
+              <i class="fas fa-file-alt text-3xl text-primary"></i>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-dark dark:text-white mb-4">
+              Resume Overview
+            </h3>
+
+            <p
+              class="text-dark/80 dark:text-white/80 max-w-2xl mx-auto mb-6 text-lg"
+            >
+              Master's student in Applied Computer Science at Southeast Missouri
+              State University with experience in full-stack development, AI/ML
+              integration, and software engineering. Skilled in Java,
+              JavaScript, React, Node.js, and various cloud services.
+            </p>
+
+            
+
+            <div
+              class="inline-block bg-gradient-to-r from-primary to-secondary p-[2px] rounded-full"
+            >
+              <a
+                href="Jeevan_Shrestha_Resume.pdf"
+                download
+                class="flex items-center gap-3 px-8 py-3 rounded-full font-medium bg-white dark:bg-dark hover:bg-transparent hover:text-white transition-all duration-300"
+              >
+                <i class="fas fa-download text-primary"></i>
+                <span class="text-dark dark:text-white"
+                  >Download Full Resume</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl font-bold mb-4">Get in Touch</h2>
+          <div
+            class="w-24 h-1 bg-gradient-to-r from-primary to-secondary mx-auto rounded"
+          ></div>
+        </div>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div class="space-y-6 relative overflow-hidden">
+            <div class="flex items-center gap-4 relative z-10">
+              <i class="fas fa-envelope text-2xl text-primary"></i>
+              <span class="text-dark/70 dark:text-white/70"
+                >shresthajeevan262@gmail.com</span
+              >
+            </div>
+            <div class="flex items-center gap-4 relative z-10">
+              <i class="fas fa-phone text-2xl text-primary"></i>
+              <span class="text-dark/70 dark:text-white/70"
+                >+1 (206) 206-3587</span
+              >
+            </div>
+            <!-- <div class="flex items-center gap-4 relative z-10">
+              <i class="fas fa-map-marker-alt text-2xl text-primary"></i>
+              <span class="text-dark/70 dark:text-white/70"
+                >Seattle, WA</span
+              >
+            </div> -->
+          </div>
+          <form class="space-y-4 relative">
+            <div class="relative z-10">
+              <input
+                type="text"
+                placeholder="Name"
+                class="contact-input w-full px-4 py-3 rounded-lg focus:outline-none"
+                required
+              />
+            </div>
+            <div class="relative z-10">
+              <input
+                type="email"
+                placeholder="Email"
+                class="contact-input w-full px-4 py-3 rounded-lg focus:outline-none"
+                required
+              />
+            </div>
+            <div class="relative z-10">
+              <textarea
+                placeholder="Message"
+                class="contact-input w-full px-4 py-3 rounded-lg focus:outline-none h-32"
+                required
+              ></textarea>
+            </div>
+            <div class="relative z-10">
+              <button
+                type="submit"
+                class="w-full px-8 py-3 rounded-full font-medium bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                Send Message
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8">
+      <div class="container mx-auto px-6 text-center">
+        <div class="flex justify-center gap-6 mb-4">
+          <a
+            href="https://github.com/shresthajeevan"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-2xl text-white/60 hover:text-white transition-colors"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/jeevan-shrestha/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-2xl text-white/60 hover:text-white transition-colors"
+          >
+            <i class="fab fa-linkedin"></i>
+          </a>
+         
+
+        </div>
+        <p class="text-white/60">
+          &copy; 2025 Jeevan Shrestha. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      // Name logo animation
+      const nameLogo = document.getElementById('nameLogo');
+      const shortName = nameLogo.querySelector('.short-name');
+      const fullName = nameLogo.querySelector('.full-name');
+      let isExpanded = false;
+
+      nameLogo.addEventListener('click', () => {
+        isExpanded = !isExpanded;
+        if (isExpanded) {
+          nameLogo.classList.add('expanded');
+          nameLogo.style.minWidth = '250px';
+        } else {
+          nameLogo.classList.remove('expanded');
+          nameLogo.style.minWidth = '80px';
+        }
+      });
+
+      // Smooth scroll animation for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          const navHeight = document.querySelector('nav').offsetHeight;
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = targetPosition - navHeight - 20; // 20px additional padding
+          
+          // Add a small delay for better UX
+          setTimeout(() => {
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+          }, 100);
+        });
+      });
+    </script>
+  </body>
 </html>
