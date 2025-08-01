@@ -4,75 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ranjan Shrestha | DevOps Portfolio</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #0d6efd;
-      color: white;
-      padding: 30px 0;
-      text-align: center;
-    }
-    header h1 { margin: 0; }
-    header p { margin-top: 5px; }
-    section {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 0 20px;
-    }
-    h2 {
-      color: #0d6efd;
-      border-bottom: 2px solid #0d6efd33;
-      padding-bottom: 5px;
-    }
-    .projects a, .contact a {
-      display: block;
-      text-decoration: none;
-      color: #0d6efd;
-      margin-bottom: 8px;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #eee;
-      margin-top: 50px;
-    }
-  </style>
 </head>
 <body>
   <header>
     <h1>Ranjan Shrestha</h1>
     <p>DevOps Engineer | Cloud Enthusiast | AWS Learner</p>
+    <button id="darkModeToggle">🌙 Dark Mode</button>
   </header>
 
-  <section class="about">
+  <section class="about fade-in">
     <h2>About Me</h2>
     <p>
-      Hi, I'm Ranjan! I'm passionate about automating cloud infrastructure, building cost-optimized solutions, 
-      and sharing DevOps knowledge through my blog posts and projects.
+      Hi, I'm Ranjan! I automate cloud infrastructure, optimize AWS costs, and
+      share DevOps knowledge through projects and blogs.
     </p>
   </section>
 
-  <section class="projects">
+  <section class="projects fade-in">
     <h2>Projects & Articles</h2>
     <a href="https://medium.com/@ranjansth1996/launching-ec2-with-bootstrap-scripts-set-up-a-web-server-in-minutes-a55e1487def5" target="_blank">
       🚀 Launching EC2 with Bootstrap Scripts
     </a>
     <a href="https://github.com/YOUR_GITHUB_PROJECT" target="_blank">
-      📊 AWS Cost Optimization Dashboard (GitHub)
+      📊 AWS Cost Optimization Dashboard
     </a>
     <a href="https://github.com/YOUR_GITHUB_PROJECT2" target="_blank">
       ⚡ Automated DevOps Deployment Pipeline
     </a>
   </section>
 
-  <section class="contact">
+  <section class="contact fade-in">
     <h2>Contact</h2>
     <a href="mailto:your.email@example.com">📧 Email Me</a>
     <a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank">💼 LinkedIn</a>
@@ -83,5 +46,7 @@
   <footer>
     © 2025 Ranjan Shrestha. Built with ❤️ using GitHub Pages.
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
