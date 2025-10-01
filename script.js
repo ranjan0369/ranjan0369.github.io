@@ -1,39 +1,42 @@
 // Dynamic content and interactivity for the portfolio
 
+// Resume file available at repository root
+const resumeFile = 'Ranjan_Shrestha_DevOps_Resume.pdf';
+
 const experiences = [
 	{
-		role: 'Senior Software Engineer',
-		company: 'Acme Web Services',
-		dates: '2022 — Present',
+		role: 'DevOps Engineer',
+		company: 'Freelance / Contract',
+		dates: '2023 — Present',
 		location: 'Remote',
 		highlights: [
-			'Led development of a React-based internal dashboard used by 200+ employees.',
-			'Owned CI/CD pipelines with GitHub Actions, reducing deploy times by 35%.'
+			'Designed and implemented CI/CD pipelines using GitHub Actions and Docker for multiple clients.',
+			'Automated infrastructure provisioning using Terraform and improved deployment reliability.'
 		]
 	},
 	{
-		role: 'Software Engineer',
+		role: 'Software Engineer / DevOps',
 		company: 'Tech Solutions Ltd.',
-		dates: '2019 — 2022',
+		dates: '2019 — 2023',
 		location: 'Kathmandu, Nepal',
 		highlights: [
-			'Built REST APIs with Node.js and Express.',
-			'Improved test coverage and added end-to-end tests with Playwright.'
+			'Built backend services with Node.js and containerized applications with Docker.',
+			'Introduced automated testing (Jest, Playwright) and improved release cadence.'
 		]
 	}
 ];
 
 const projects = [
 	{
-		title: 'Project Atlas',
-		description: 'A data visualization tool for business metrics with exportable reports.',
-		tech: ['React', 'D3', 'Node.js'],
+		title: 'Deployment Standardizer',
+		description: 'A set of CI templates and scripts to standardize deployments across teams, reducing onboarding time for new projects.',
+		tech: ['GitHub Actions', 'Docker', 'Bash'],
 		link: '#'
 	},
 	{
-		title: 'DevFlow',
-		description: 'Developer tooling to scaffold projects and standardize CI templates.',
-		tech: ['TypeScript', 'GitHub Actions'],
+		title: 'Monitoring & Alerts',
+		description: 'Implemented monitoring and alerting using Prometheus and Grafana for services to reduce MTTR.',
+		tech: ['Prometheus', 'Grafana', 'Alertmanager'],
 		link: '#'
 	}
 ];
