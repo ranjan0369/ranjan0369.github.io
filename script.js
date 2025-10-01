@@ -62,12 +62,39 @@ function renderProjects() {
 	projects.forEach(p => {
 		const card = document.createElement('article');
 		card.className = 'project';
-		card.innerHTML = `
+		// optional image
+		if (p.image) {
+			const img = document.createElement('img');
+			img.className = 'project-image';
+			img.src = p.image;
+			img.alt = p.title + ' screenshot';
+			card.appendChild(img);
+		}
+		const body = document.createElement('div');
+		body.className = 'project-body';
+		body.innerHTML = `
 			<h3>${p.title}</h3>
 			<p>${p.description}</p>
 			<p class="muted">${p.tech.join(' · ')}</p>
-			<p><a class="btn btn-outline" href="${p.link}" target="_blank" rel="noopener">View</a></p>
 		`;
+		card.appendChild(body);
+		const footer = document.createElement('div');
+		footer.className = 'project-footer';
+		const left = document.createElement('div');
+		left.className = 'meta';
+		left.textContent = '';
+		const actions = document.createElement('div');
+		actions.className = 'actions';
+		const view = document.createElement('a');
+		view.className = 'btn btn-outline';
+		view.href = p.link || '#';
+		view.target = '_blank';
+		view.rel = 'noopener';
+		view.textContent = 'View';
+		actions.appendChild(view);
+		footer.appendChild(left);
+		footer.appendChild(actions);
+		card.appendChild(footer);
 		container.appendChild(card);
 	});
 }
