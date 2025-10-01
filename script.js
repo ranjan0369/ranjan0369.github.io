@@ -1,283 +1,150 @@
-// Remove Three.js initialization
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById('canvas-container').appendChild(renderer.domElement);
+// Dynamic content and interactivity for the portfolio
 
-camera.position.z = 5;
+const experiences = [
+	{
+		role: 'Senior Software Engineer',
+		company: 'Acme Web Services',
+		dates: '2022 — Present',
+		location: 'Remote',
+		highlights: [
+			'Led development of a React-based internal dashboard used by 200+ employees.',
+			'Owned CI/CD pipelines with GitHub Actions, reducing deploy times by 35%.'
+		]
+	},
+	{
+		role: 'Software Engineer',
+		company: 'Tech Solutions Ltd.',
+		dates: '2019 — 2022',
+		location: 'Kathmandu, Nepal',
+		highlights: [
+			'Built REST APIs with Node.js and Express.',
+			'Improved test coverage and added end-to-end tests with Playwright.'
+		]
+	}
+];
 
-function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
+const projects = [
+	{
+		title: 'Project Atlas',
+		description: 'A data visualization tool for business metrics with exportable reports.',
+		tech: ['React', 'D3', 'Node.js'],
+		link: '#'
+	},
+	{
+		title: 'DevFlow',
+		description: 'Developer tooling to scaffold projects and standardize CI templates.',
+		tech: ['TypeScript', 'GitHub Actions'],
+		link: '#'
+	}
+];
+
+function renderExperience() {
+	const container = document.getElementById('experience-list');
+	container.innerHTML = '';
+	experiences.forEach(exp => {
+		const el = document.createElement('div');
+		el.className = 'experience-item';
+		el.innerHTML = `
+			<div class="role">${exp.role} <span class="company">— ${exp.company}</span></div>
+			<div class="dates">${exp.dates} · ${exp.location}</div>
+			<ul>${exp.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
+		`;
+		container.appendChild(el);
+	});
 }
 
-// Handle window resize
-window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-});
-
-// Initialize GSAP ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
-
-// Navbar scroll effect
-const navbar = document.querySelector('nav');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll <= 0) {
-        navbar.classList.remove('scroll-up');
-        return;
-    }
-    
-    if (currentScroll > lastScroll && !navbar.classList.contains('scroll-down')) {
-        navbar.classList.remove('scroll-up');
-        navbar.classList.add('scroll-down');
-    } else if (currentScroll < lastScroll && navbar.classList.contains('scroll-down')) {
-        navbar.classList.remove('scroll-down');
-        navbar.classList.add('scroll-up');
-    }
-    lastScroll = currentScroll;
-});
-
-// Mobile menu toggle
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.querySelector('nav .md\\:hidden');
-
-if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
+function renderProjects() {
+	const container = document.getElementById('project-list');
+	container.innerHTML = '';
+	projects.forEach(p => {
+		const card = document.createElement('article');
+		card.className = 'project';
+		card.innerHTML = `
+			<h3>${p.title}</h3>
+			<p>${p.description}</p>
+			<p class="muted">${p.tech.join(' · ')}</p>
+			<p><a class="btn btn-outline" href="${p.link}" target="_blank" rel="noopener">View</a></p>
+		`;
+		container.appendChild(card);
+	});
 }
 
-// Dark Mode Toggle
-const darkModeToggle = document.querySelector('.dark-mode-toggle');
-const html = document.documentElement;
-const moonIcon = document.querySelector('.fa-moon');
-const sunIcon = document.querySelector('.fa-sun');
-
-// Check for saved theme preference
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    html.classList.add('dark');
-    moonIcon.classList.add('hidden');
-    sunIcon.classList.remove('hidden');
+function setYear() {
+	const y = new Date().getFullYear();
+	const el = document.getElementById('year');
+	if (el) el.textContent = String(y);
 }
 
-darkModeToggle.addEventListener('click', () => {
-    html.classList.toggle('dark');
-    moonIcon.classList.toggle('hidden');
-    sunIcon.classList.toggle('hidden');
-    
-    // Save theme preference
-    const theme = html.classList.contains('dark') ? 'dark' : 'light';
-    localStorage.setItem('theme', theme);
-});
+// Mobile navigation toggle
+function setupNavToggle() {
+	const btn = document.getElementById('nav-toggle');
+	const nav = document.getElementById('primary-nav');
+	btn.addEventListener('click', () => {
+		const open = nav.style.display === 'block';
+		nav.style.display = open ? '' : 'block';
+		btn.setAttribute('aria-expanded', String(!open));
+	});
+	// Close nav on link click (mobile)
+	nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+		if (window.innerWidth <= 800) nav.style.display = '';
+	}));
+}
 
-// Experience Section
-document.addEventListener('DOMContentLoaded', function() {
-    console.log("DOM Content Loaded");
-    
-    // Add animate class to all experience elements right away
-    const timelineItems = document.querySelectorAll('.timeline-item');
-    const timelineDots = document.querySelectorAll('.timeline-dot');
-    const experienceCards = document.querySelectorAll('.experience-card');
-    
-    console.log("Timeline items:", timelineItems.length);
-    
-    // Add all classes immediately without animations
-    timelineItems.forEach(item => {
-        item.classList.add('animate');
-    });
-    
-    timelineDots.forEach(dot => {
-        dot.classList.add('animate');
-    });
-    
-    experienceCards.forEach(card => {
-        card.classList.add('animate');
-    });
+// Smooth scroll for internal links
+function setupSmoothScroll() {
+	document.querySelectorAll('a[href^="#"]').forEach(a => {
+		a.addEventListener('click', e => {
+			const href = a.getAttribute('href');
+			if (!href || href === '#') return;
+			const target = document.querySelector(href);
+			if (target) {
+				e.preventDefault();
+				target.scrollIntoView({behavior:'smooth',block:'start'});
+			}
+		});
+	});
+}
 
-    // Experience Modal
-    const readMoreButtons = document.querySelectorAll('.read-more-btn');
-    const experienceModal = document.getElementById('experienceModal');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalContent = document.getElementById('modalContent');
-    const closeModal = document.querySelector('.close-modal');
+// Contact form (mock) validation and submit
+function setupContactForm() {
+	const form = document.getElementById('contact-form');
+	const status = document.getElementById('form-status');
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		status.textContent = '';
+		const name = document.getElementById('contact-name').value.trim();
+		const email = document.getElementById('contact-email').value.trim();
+		const message = document.getElementById('contact-message').value.trim();
+		if (!name || !email || !message) {
+			status.textContent = 'Please fill all fields.';
+			return;
+		}
+		// Simple email check
+		if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+			status.textContent = 'Please provide a valid email.';
+			return;
+		}
 
-    if (readMoreButtons.length && experienceModal && modalTitle && modalContent && closeModal) {
-        const experienceDetails = {
-            "Graduate Research Assistant Details": {
-                title: "Graduate Research Assistant",
-                content: `
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2">Course Module Development</h4>
-                            <p>Designed and developed a comprehensive graduate-level course module focused on Software Supply Chain Security, incorporating AI technologies to enhance learning outcomes. The module includes:</p>
-                            <ul class="list-disc list-inside mt-2 ml-4">
-                                <li>Interactive learning materials</li>
-                                <li>AI-powered vulnerability detection exercises</li>
-                                <li>Real-world case studies</li>
-                                <li>Hands-on security assessment tools</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2">Research Contributions</h4>
-                            <p>Conducted extensive research on modern security vulnerabilities and developed innovative methods for their detection and mitigation. Key achievements include:</p>
-                            <ul class="list-disc list-inside mt-2 ml-4">
-                                <li>Published research on AI-driven security analysis</li>
-                                <li>Developed new vulnerability detection algorithms</li>
-                                <li>Created automated security assessment tools</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2">Educational Technology</h4>
-                            <p>Implemented cutting-edge educational technologies to enhance the learning experience:</p>
-                            <ul class="list-disc list-inside mt-2 ml-4">
-                                <li>Interactive coding environments</li>
-                                <li>AI-powered feedback systems</li>
-                                <li>Virtual security labs</li>
-                            </ul>
-                        </div>
-                    </div>
-                `
-            },
-            "Software Engineer Intern Details": {
-                title: "Software Engineer Intern",
-                content: `
-                    <div class="space-y-4">
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2">UI/UX Design</h4>
-                            <p>Led the design and implementation of user interfaces using Figma, creating cohesive and intuitive designs:</p>
-                            <ul class="list-disc list-inside mt-2 ml-4">
-                                <li>Designed responsive layouts for multiple devices</li>
-                                <li>Created interactive prototypes</li>
-                                <li>Implemented design systems</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2">Calendar System Development</h4>
-                            <p>Researched and implemented an optimized calendar system:</p>
-                            <ul class="list-disc list-inside mt-2 ml-4">
-                                <li>Integrated with various calendar APIs</li>
-                                <li>Implemented RFC-compliant scheduling</li>
-                                <li>Optimized performance for large datasets</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4 class="font-semibold text-lg mb-2">E-commerce Development</h4>
-                            <p>Developed a Vue.js-based storefront with focus on user experience:</p>
-                            <ul class="list-disc list-inside mt-2 ml-4">
-                                <li>Implemented responsive design patterns</li>
-                                <li>Optimized performance metrics</li>
-                                <li>Enhanced accessibility features</li>
-                            </ul>
-                        </div>
-                    </div>
-                `
-            }
-        };
+		// Simulate network
+		status.textContent = 'Sending…';
+		try {
+			await new Promise(r => setTimeout(r, 900));
+			status.textContent = 'Message sent — thanks! I will reply soon.';
+			form.reset();
+		} catch (err) {
+			status.textContent = 'Failed to send. Please try again later.';
+		}
+	});
+}
 
-        readMoreButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const details = button.getAttribute('data-details');
-                if (experienceDetails[details]) {
-                    modalTitle.textContent = experienceDetails[details].title;
-                    modalContent.innerHTML = experienceDetails[details].content;
-                } else {
-                    modalTitle.textContent = details;
-                    modalContent.innerHTML = `
-                        <p>Additional details about ${details} will be displayed here.</p>
-                        <p>This is a placeholder for the detailed content that would be shown in the modal.</p>
-                    `;
-                }
-                experienceModal.classList.remove('hidden');
-                experienceModal.classList.add('flex');
-                const modalBox = experienceModal.querySelector('.bg-white, .dark\\:bg-dark');
-                if (modalBox) {
-                    modalBox.classList.add('scale-100', 'opacity-100');
-                }
-            });
-        });
+function init() {
+	renderExperience();
+	renderProjects();
+	setYear();
+	setupNavToggle();
+	setupSmoothScroll();
+	setupContactForm();
+}
 
-        closeModal.addEventListener('click', () => {
-            const modalBox = experienceModal.querySelector('.bg-white, .dark\\:bg-dark');
-            if (modalBox) {
-                modalBox.classList.remove('scale-100', 'opacity-100');
-            }
-            setTimeout(() => {
-                experienceModal.classList.add('hidden');
-                experienceModal.classList.remove('flex');
-            }, 300);
-        });
+document.addEventListener('DOMContentLoaded', init);
 
-        experienceModal.addEventListener('click', (e) => {
-            if (e.target === experienceModal) {
-                const modalBox = experienceModal.querySelector('.bg-white, .dark\\:bg-dark');
-                if (modalBox) {
-                    modalBox.classList.remove('scale-100', 'opacity-100');
-                }
-                setTimeout(() => {
-                    experienceModal.classList.add('hidden');
-                    experienceModal.classList.remove('flex');
-                }, 300);
-            }
-        });
-    }
-});
-
-// Active nav link on scroll
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-link');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        
-        if (pageYOffset >= sectionTop - 60) {
-            current = section.getAttribute('id');
-        }
-    });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// Form submission
-const contactForm = document.querySelector('form');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-    
-    // Here you would typically send the data to a server
-    console.log('Form submitted:', data);
-    
-    // Show success message
-    const successMessage = document.createElement('div');
-    successMessage.className = 'bg-success/10 border border-success text-success px-4 py-3 rounded relative';
-    successMessage.textContent = 'Message sent successfully!';
-    contactForm.appendChild(successMessage);
-    
-    // Reset form
-    contactForm.reset();
-    
-    // Remove success message after 3 seconds
-    setTimeout(() => {
-        successMessage.remove();
-    }, 3000);
-}); 
