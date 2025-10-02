@@ -28,19 +28,26 @@ const experiences = [
 
 const projects = [
 	{
-		title: 'Deployment Standardizer',
-		description: 'A set of CI templates and scripts to standardize deployments across teams, reducing onboarding time for new projects.',
-		tech: ['GitHub Actions', 'Docker', 'Bash'],
+		title: 'Terraform EKS Provisioner',
+		description: 'A complete solution to provision and manage EKS clusters using Terraform, including networking, IAM roles, and node groups.',
+		tech: ['Terraform', 'AWS EKS', 'Bash', 'Helm'],
 		image: 'assets/project1.svg',
-		link: '#'
+		link: 'https://github.com/ranjan0369/terraform-eks-provisioner'
 	},
 	{
-		title: 'Monitoring & Alerts',
-		description: 'Implemented monitoring and alerting using Prometheus and Grafana for services to reduce MTTR.',
-		tech: ['Prometheus', 'Grafana', 'Alertmanager'],
+		title: 'Facial Expression Recognition System',
+		description: 'Beginner level project using Fisherfaces algorithm to recognize human facial expressions from images.',
+		tech: ['Python', 'OpenCV', 'NumPy', 'scikit-learn'],
 		image: 'assets/project2.svg',
-		link: '#'
-	}
+		link: 'https://github.com/ranjan0369/facial-expression-recognition-system'
+	},
+    {
+        title: 'k3s provisioner using Ansible',
+        description: 'Ansible playbook to automate the deployment of a lightweight Kubernetes cluster using k3s on multiple nodes.',
+        tech: ['Ansible', 'k3s', 'Bash'],
+        image: 'assets/project3.svg',
+        link: '#'
+    }
 ];
 
 function renderExperience() {
