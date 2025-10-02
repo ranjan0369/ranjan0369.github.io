@@ -59,6 +59,11 @@ body{
 .project-footer .actions{margin-left:auto}
 .project-footer .actions .btn{padding:0.45rem 0.8rem}
 
+/* Profile images */
+.profile-thumb{border-radius:999px;display:inline-block}
+.hero-top{display:flex;align-items:center;gap:1rem}
+.profile-image{border-radius:999px;border:6px solid var(--surface);box-shadow:var(--shadow);width:120px;height:120px}
+
 /* Experience items: more balanced padding and spacing */
 .experience-item{padding:1rem 1rem;background:var(--surface);border-radius:8px;margin-bottom:0.75rem;border:1px solid rgba(9,30,66,0.03)}
 .experience-item .role,.experience-item .company,.experience-item .dates{display:block}
@@ -80,5 +85,7 @@ body{
   .nav-toggle{display:block}
   .container{padding:1rem}
   .hero h1{font-size:1.75rem}
+  .cta-group{flex-direction:column}
+  .hero-top{justify-content:center}
   .site-header{position:static;margin:0;border-radius:0}
 }

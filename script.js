@@ -31,12 +31,14 @@ const projects = [
 		title: 'Deployment Standardizer',
 		description: 'A set of CI templates and scripts to standardize deployments across teams, reducing onboarding time for new projects.',
 		tech: ['GitHub Actions', 'Docker', 'Bash'],
+		image: 'assets/project1.svg',
 		link: '#'
 	},
 	{
 		title: 'Monitoring & Alerts',
 		description: 'Implemented monitoring and alerting using Prometheus and Grafana for services to reduce MTTR.',
 		tech: ['Prometheus', 'Grafana', 'Alertmanager'],
+		image: 'assets/project2.svg',
 		link: '#'
 	}
 ];
