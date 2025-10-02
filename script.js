@@ -95,15 +95,6 @@ function renderProjects() {
 			b.textContent = t;
 			techList.appendChild(b);
 		});
-		// if featured, keep gradient badges; else make muted badges
-		if (!p.featured) {
-			techList.querySelectorAll('.tech-badge').forEach(b => {
-				b.style.background = 'transparent';
-				b.style.color = 'var(--muted)';
-				b.style.fontWeight = '600';
-				b.style.border = '1px solid rgba(9,30,66,0.06)';
-			});
-		}
 		body.appendChild(techList);
 		card.appendChild(body);
 		const footer = document.createElement('div');
