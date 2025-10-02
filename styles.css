@@ -39,6 +39,7 @@ body{
 .hero h1{font-size:2.25rem;margin:0}
 .lead{color:var(--muted);max-width:64ch}
 .cta-group{display:flex;gap:0.75rem}
+.hero h1, .section h2, .project h3 { text-align: center; }
 .btn{background:linear-gradient(90deg,#06b6d4,#3b82f6);color:white;padding:0.6rem 1rem;border-radius:8px;text-decoration:none;font-weight:600;box-shadow:var(--shadow)}
 .btn-outline{background:transparent;border:1px solid rgba(9,30,66,0.06);color:var(--text)}
 
@@ -64,6 +65,17 @@ body{
 .hero-top{display:flex;align-items:center;gap:1rem}
 .profile-image{border-radius:999px;border:6px solid var(--surface);box-shadow:var(--shadow);width:120px;height:120px}
 
+/* Hero card layout: left image, right content */
+.hero-card{display:grid;grid-template-columns:220px 1fr;gap:1rem;background:var(--surface);padding:1rem;border-radius:12px;box-shadow:var(--shadow);align-items:center}
+.hero-card-left{display:flex;align-items:center;justify-content:center}
+.profile-image-large{width:200px;height:200px;border-radius:12px;object-fit:cover;border:6px solid var(--surface);box-shadow:var(--shadow)}
+.hero-card-right{padding:0 1rem}
+
+/* Tech badges */
+.tech-list{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem}
+.tech-badge{padding:0.35rem 0.6rem;border-radius:999px;background:linear-gradient(90deg,#7c3aed,#06b6d4);color:white;font-weight:600;font-size:0.9rem}
+
+
 /* Experience items: more balanced padding and spacing */
 .experience-item{padding:1rem 1rem;background:var(--surface);border-radius:8px;margin-bottom:0.75rem;border:1px solid rgba(9,30,66,0.03)}
 .experience-item .role,.experience-item .company,.experience-item .dates{display:block}
@@ -87,5 +99,7 @@ body{
   .hero h1{font-size:1.75rem}
   .cta-group{flex-direction:column}
   .hero-top{justify-content:center}
+  .hero-card{grid-template-columns:1fr;align-items:center}
+  .hero-card-right{padding:0}
   .site-header{position:static;margin:0;border-radius:0}
 }

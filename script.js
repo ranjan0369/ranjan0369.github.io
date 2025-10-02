@@ -32,7 +32,8 @@ const projects = [
 		description: 'A complete solution to provision and manage EKS clusters using Terraform, including networking, IAM roles, and node groups.',
 		tech: ['Terraform', 'AWS EKS', 'Bash', 'Helm'],
 		image: 'assets/project1.svg',
-		link: 'https://github.com/ranjan0369/terraform-eks-provisioner'
+		link: 'https://github.com/ranjan0369/eks-provisioner-terraform',
+		featured: true
 	},
 	{
 		title: 'Facial Expression Recognition System',
@@ -84,8 +85,26 @@ function renderProjects() {
 		body.innerHTML = `
 			<h3>${p.title}</h3>
 			<p>${p.description}</p>
-			<p class="muted">${p.tech.join(' · ')}</p>
 		`;
+		// tech badges
+		const techList = document.createElement('div');
+		techList.className = 'tech-list';
+		p.tech.forEach(t => {
+			const b = document.createElement('span');
+			b.className = 'tech-badge';
+			b.textContent = t;
+			techList.appendChild(b);
+		});
+		// if featured, keep gradient badges; else make muted badges
+		if (!p.featured) {
+			techList.querySelectorAll('.tech-badge').forEach(b => {
+				b.style.background = 'transparent';
+				b.style.color = 'var(--muted)';
+				b.style.fontWeight = '600';
+				b.style.border = '1px solid rgba(9,30,66,0.06)';
+			});
+		}
+		body.appendChild(techList);
 		card.appendChild(body);
 		const footer = document.createElement('div');
 		footer.className = 'project-footer';
