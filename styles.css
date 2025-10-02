@@ -75,6 +75,10 @@ body{
 .tech-list{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem}
 .tech-badge{padding:0.35rem 0.6rem;border-radius:999px;background:linear-gradient(90deg,#7c3aed,#06b6d4);color:white;font-weight:600;font-size:0.9rem}
 
+/* Gradient underline for section headings */
+.section h2{position:relative;display:inline-block;padding-bottom:0.75rem}
+.section h2::after{content:'';display:block;height:6px;width:80px;border-radius:999px;margin:8px auto 0;background:linear-gradient(90deg,#7c3aed,#06b6d4)}
+
 
 /* Experience items: more balanced padding and spacing */
 .experience-item{padding:1rem 1rem;background:var(--surface);border-radius:8px;margin-bottom:0.75rem;border:1px solid rgba(9,30,66,0.03)}
