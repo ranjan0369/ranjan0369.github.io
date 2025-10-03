@@ -6,8 +6,8 @@ const resumeFile = 'Ranjan_Shrestha_DevOps_Resume.pdf';
 const experiences = [
 	{
 		role: 'DevOps Engineer',
-		company: 'Freelance / Contract',
-		dates: '2023 — Present',
+		company: 'Identv Nepal Pvt. Ltd.',
+		dates: '2021 — 2025',
 		location: 'Remote',
 		highlights: [
 			'Designed and implemented CI/CD pipelines using GitHub Actions and Docker for multiple clients.',
@@ -15,13 +15,14 @@ const experiences = [
 		]
 	},
 	{
-		role: 'Software Engineer / DevOps',
-		company: 'Tech Solutions Ltd.',
-		dates: '2019 — 2023',
+		role: 'Network and Security Engineer',
+		company: 'CloudTech Solutions Ltd.',
+		dates: '2019 — 2021',
 		location: 'Kathmandu, Nepal',
 		highlights: [
-			'Built backend services with Node.js and containerized applications with Docker.',
-			'Introduced automated testing (Jest, Playwright) and improved release cadence.'
+			'Automated repetitive network tasks with Bash and Ansible, saving engineering time.',
+			'Built and maintained secure network environments including VPN, VLAN, and firewall setups.',
+            'Supported cloud migration projects and created baseline configurations aligned with security standards.'
 		]
 	}
 ];
@@ -48,6 +49,13 @@ const projects = [
         tech: ['Ansible', 'k3s', 'Bash'],
         image: 'assets/k3s.jpg',
         link: '#'
+    },
+    {
+        title: 'Sentiment Analysis',
+        description: 'Beginner level project using Logistic Regression and TFIDF to classify text sentiment as positive or negative.',
+        tech: ['Python', 'scikit-learn', 'Pandas'],
+        image: 'assets/sentiment.jpg',
+        link: 'https://github.com/ranjan0369/sentiment-analysis'
     }
 ];
 
