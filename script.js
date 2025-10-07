@@ -32,7 +32,7 @@ const projects = [
 		title: 'Terraform EKS Provisioner',
 		description: 'A complete solution to provision and manage EKS clusters using Terraform, including networking, IAM roles, and node groups.',
 		tech: ['Terraform', 'AWS EKS', 'Bash', 'Helm'],
-		image: 'assets/terraform1.jpg',
+		image: 'assets/projects/terraform1.jpg',
 		link: 'https://github.com/ranjan0369/eks-provisioner-terraform',
 		featured: true
 	},
@@ -40,21 +40,21 @@ const projects = [
 		title: 'Facial Expression Recognition System',
 		description: 'Beginner level project using Fisherfaces algorithm to recognize human facial expressions from images.',
 		tech: ['Python', 'OpenCV', 'NumPy', 'scikit-learn'],
-		image: 'assets/fers.jpg',
+		image: 'assets/projects/fers.jpg',
 		link: 'https://github.com/ranjan0369/facial-expression-recognition-system'
 	},
     {
         title: 'k3s provisioner using Ansible',
         description: 'Ansible playbook to automate the deployment of a lightweight Kubernetes cluster using k3s on multiple nodes.',
         tech: ['Ansible', 'k3s', 'Bash'],
-        image: 'assets/k3s.jpg',
+        image: 'assets/projects/k3s.jpg',
         link: '#'
     },
     {
         title: 'Sentiment Analysis',
         description: 'Beginner level project using Logistic Regression and TFIDF to classify text sentiment as positive or negative.',
         tech: ['Python', 'scikit-learn', 'Pandas'],
-        image: 'assets/sentiment.jpg',
+        image: 'assets/projects/sentiment.jpg',
         link: 'https://github.com/ranjan0369/sentiment-analysis'
     }
 ];
@@ -204,4 +204,3 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
-
