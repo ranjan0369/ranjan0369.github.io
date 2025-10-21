@@ -78,35 +78,38 @@
 				</div>
 			</section>
 
-			<!-- Certifications Section -->
+			<!-- Certifications Section (Carousel) -->
 			<section id="certifications" class="section container">
 				<h2>Certifications</h2>
-				<div class="certifications-container">
-					<div class="certification-card">
-						<div class="certification-badge">
-							<img src="assets/badges/terraform.png" alt="Terraform Associate Badge" class="cert-badge-img">
-						</div>
-						<div class="certification-details">
-							<h3>HashiCorp Certified Terraform Associate</h3>
-							<p class="cert-issuer">Issuer: HashiCorp</p>
-							<p class="cert-date">Issued: September 2025</p>
-							<p class="cert-id">Credential ID: 9b68eaf8-503c-4503-9746-2abcc42e9470</p>
-						</div>
-						<a href="https://www.credly.com/badges/9b68eaf8-503c-4503-9746-2abcc42e9470/public_url" class="cert-verify-btn">Verify Certificate</a>
+				<div class="cert-carousel" aria-roledescription="carousel">
+					<button class="cert-prev" aria-label="Previous certificate">‹</button>
+					<div class="cert-viewport">
+						<ul class="cert-track">
+							<li class="cert-slide" data-id="terraform">
+								<figure>
+									<img src="assets/badges/terraform.png" alt="Terraform Associate Badge" class="cert-badge-img">
+									<figcaption>
+										<h3>HashiCorp Certified Terraform Associate</h3>
+										<p class="cert-issuer">HashiCorp · Sep 2025</p>
+									</figcaption>
+								</figure>
+								<a href="https://www.credly.com/badges/9b68eaf8-503c-4503-9746-2abcc42e9470/public_url" class="cert-verify-btn">Verify</a>
+							</li>
+							<li class="cert-slide" data-id="azure">
+								<figure>
+									<img src="assets/badges/microsoft-badge.png" alt="Microsoft Azure Fundamentals Badge" class="cert-badge-img">
+									<figcaption>
+										<h3>Microsoft Certified: Azure Fundamentals</h3>
+										<p class="cert-issuer">Microsoft · Mar 2021</p>
+									</figcaption>
+								</figure>
+								<a href="https://www.credly.com/badges/129ab415-05aa-4bc7-abb5-5930d46ad9b1/public_url" class="cert-verify-btn">Verify</a>
+							</li>
+							<!-- Add more <li class="cert-slide"> items for new badges -->
+						</ul>
 					</div>
-					<div class="certification-card">
-						<div class="certification-badge">
-							<img src="assets/badges/microsoft-badge.png" alt="Microsoft Azure Fundamentals Badge" class="cert-badge-img">
-						</div>
-						<div class="certification-details">
-							<h3>Microsoft Certified: Azure Fundamentals</h3>
-							<p class="cert-issuer">Issuer: Microsoft</p>
-							<p class="cert-date">Issued: March 2021</p>
-							<p class="cert-id">Credential ID: 129ab415-05aa-4bc7-abb5-5930d46ad9b1</p>
-						</div>
-						<a href="https://www.credly.com/badges/129ab415-05aa-4bc7-abb5-5930d46ad9b1/public_url" class="cert-verify-btn">Verify Certificate</a>
-					</div>
-					<!-- You can add more certification cards here -->
+					<button class="cert-next" aria-label="Next certificate">›</button>
+					<div class="cert-indicators" aria-hidden="false"></div>
 				</div>
 			</section>
 
