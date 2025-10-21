@@ -137,13 +137,17 @@ function setupNavToggle() {
 	const btn = document.getElementById('nav-toggle');
 	const nav = document.getElementById('primary-nav');
 	btn.addEventListener('click', () => {
-		const open = nav.style.display === 'block';
-		nav.style.display = open ? '' : 'block';
-		btn.setAttribute('aria-expanded', String(!open));
+		const open = nav.classList.toggle('open');
+		btn.setAttribute('aria-expanded', String(open));
+		// if opening, focus the first link for accessibility
+		if (open) {
+			const first = nav.querySelector('a');
+			if (first) first.focus();
+		}
 	});
 	// Close nav on link click (mobile)
 	nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-		if (window.innerWidth <= 800) nav.style.display = '';
+		if (window.innerWidth <= 800) nav.classList.remove('open');
 	}));
 }
 
@@ -201,6 +205,78 @@ function init() {
 	setupNavToggle();
 	setupSmoothScroll();
 	setupContactForm();
+	setupCertCarousel();
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+// Certifications carousel implementation
+function setupCertCarousel() {
+	const carousel = document.querySelector('.cert-carousel');
+	if (!carousel) return;
+	const track = carousel.querySelector('.cert-track');
+	const slides = Array.from(carousel.querySelectorAll('.cert-slide'));
+	const prevBtn = carousel.querySelector('.cert-prev');
+	const nextBtn = carousel.querySelector('.cert-next');
+	const indicatorsWrap = carousel.querySelector('.cert-indicators');
+	if (!track || slides.length === 0) return;
+	if (!prevBtn || !nextBtn || !indicatorsWrap) {
+		console.warn('Cert carousel missing controls or indicators DOM elements');
+	}
+	let index = 0;
+	let autoplayId = null;
+
+	// build indicators
+		slides.forEach((s, i) => {
+			const btn = document.createElement('button');
+			btn.type = 'button';
+			btn.setAttribute('aria-label', `Show certificate ${i+1}`);
+			if (i === 0) btn.classList.add('active');
+			btn.addEventListener('click', () => goTo(i));
+			if (indicatorsWrap) indicatorsWrap.appendChild(btn);
+		});
+
+	const indicators = Array.from(indicatorsWrap.children);
+
+	function update() {
+		track.style.transform = `translateX(-${index * 100}%)`;
+		indicators.forEach((b, i) => b.classList.toggle('active', i === index));
+	}
+
+	function prev() { index = (index - 1 + slides.length) % slides.length; update(); }
+	function next() { index = (index + 1) % slides.length; update(); }
+	function goTo(i) { index = i % slides.length; update(); restartAutoplay(); }
+
+		if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
+		if (nextBtn) nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
+
+	// keyboard support
+	carousel.addEventListener('keydown', (e) => {
+		if (e.key === 'ArrowLeft') prev();
+		if (e.key === 'ArrowRight') next();
+	});
+
+		// autoplay (guarded to avoid multiple intervals stacking)
+		function startAutoplay() {
+			if (autoplayId) return; // already running
+			autoplayId = setInterval(() => { next(); }, 4500);
+		}
+		function stopAutoplay() {
+			if (autoplayId) {
+				clearInterval(autoplayId);
+				autoplayId = null;
+			}
+		}
+		function restartAutoplay() { stopAutoplay(); startAutoplay(); }
+
+	carousel.addEventListener('mouseenter', stopAutoplay);
+	carousel.addEventListener('focusin', stopAutoplay);
+	carousel.addEventListener('mouseleave', startAutoplay);
+	carousel.addEventListener('focusout', startAutoplay);
+
+	// make carousel focusable for keyboard navigation
+	carousel.tabIndex = 0;
+
+	update();
+	startAutoplay();
+}
