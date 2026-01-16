@@ -10,8 +10,11 @@ const experiences = [
 		dates: '2021 — 2025',
 		location: 'Remote',
 		highlights: [
-			'Designed and implemented CI/CD pipelines using GitHub Actions and Docker for multiple clients.',
-			'Automated infrastructure provisioning using Terraform and improved deployment reliability.'
+			'Built and optimized CI/CD pipelines using CircleCI and GitHub Actions, improving deployment frequency and reliability.',
+			'Automated infrastructure provisioning using Terraform and Ansible, reducing manual operations.',
+			'Implemented robust monitoring and alerting with Prometheus and Grafana, achieving 99.9% system uptime.',
+			'Worked cross-functionally with developers to resolve build and deployment issues, reducing incident resolution time.',
+			'Created comprehensive documentation for deployment workflows and troubleshooting procedures.'
 		]
 	},
 	{
@@ -44,11 +47,11 @@ const projects = [
 		link: 'https://github.com/ranjan0369/facial-expression-recognition-system'
 	},
     {
-        title: 'k3s provisioner using Ansible',
-        description: 'Ansible playbook to automate the deployment of a lightweight Kubernetes cluster using k3s on multiple nodes.',
-        tech: ['Ansible', 'k3s', 'Bash'],
-        image: 'assets/projects/k3s.jpg',
-        link: '#'
+        title: 'Nomad Cluster Provisioning using Ansible',
+        description: 'Ansible playbook to automate the deployment of a nomad cluster.',
+        tech: ['Ansible', 'Nomad', 'Bash'],
+        image: 'assets/projects/nomad.jpg',
+        link: 'https://github.com/ranjan0369/nomad-cluster-provisioner'
     },
     {
         title: 'Sentiment Analysis',
