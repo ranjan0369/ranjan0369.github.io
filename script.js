@@ -87,7 +87,7 @@ function renderExperience() {
 		const el = document.createElement('div');
 		el.className = 'experience-item';
 		el.innerHTML = `
-			<div class="role">${exp.role} <span class="company">— ${exp.company}</span></div>
+			<div class="role">${exp.role} | ${exp.company}</div>
 			<div class="dates">${exp.dates} · ${exp.location}</div>
 			<ul>${exp.highlights.map(h => `<li>${h}</li>`).join('')}</ul>
 		`;
