@@ -5,6 +5,17 @@ const resumeFile = 'Ranjan_Shrestha_DevOps_Resume.pdf';
 
 const experiences = [
 	{
+		role: 'DevOps Engineer Intern',
+		company: 'Springer Capital Investments LLC',
+		dates: '2025 — Present',
+		location: 'Remote',
+		highlights: [
+			'Designed a production grade multi-az Patroni Cluster and provisioned the infrastructure using Terraform and Ansible',
+			'Implemented security checks in CICD pipeline such as secret scanning, SAST, Dependency Scanning, Container Image scanning using tools such as Gitleaks, Semgrep, Trivy, Syf and Grype.',
+			'Provisioned production ready Nomad cluster using Ansible for running container workflows.'
+		]
+	},
+	{
 		role: 'DevOps Engineer',
 		company: 'Identv Nepal Pvt. Ltd.',
 		dates: '2021 — 2025',
@@ -59,6 +70,13 @@ const projects = [
         tech: ['Python', 'scikit-learn', 'Pandas'],
         image: 'assets/projects/sentiment.jpg',
         link: 'https://github.com/ranjan0369/sentiment-analysis'
+    },
+	{
+        title: 'Multi-AZ Patroni Cluster with Terraform and Ansible',
+        description: 'Beginner level project using Logistic Regression and TFIDF to classify text sentiment as positive or negative.',
+        tech: ['Ansible', 'Terraform', 'PostgreSQL', 'Patroni'],
+        image: 'assets/projects/patroni.jpg',
+        link: ' https://github.com/ranjan0369/multi-az-patroni-cluster'
     }
 ];
 
